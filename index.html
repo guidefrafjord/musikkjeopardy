@@ -130,13 +130,16 @@
   }
   .pill-dark { border: 0; background: var(--btn-dark); color: var(--btn-dark-ink); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 12%); }
   .pill-dark:hover { background: var(--btn-dark-hover); }
-  .pill-light { border: 1px solid var(--line-strong); background: var(--surface-solid); color: var(--btn-light-ink); }
-  .pill-light:hover { background: var(--btn-light-hover); }
-  .short { display: inline; } .long { display: none; }
+  .reset-link {
+    border: 0; background: none; padding: 8px 6px;
+    font-size: 11px; font-weight: 600; color: var(--ink-soft);
+    text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px;
+    transition: color 150ms, text-decoration-color 150ms;
+  }
+  .reset-link:hover { color: var(--ink); text-decoration-color: currentColor; }
+  .reset-link.armed, .reset-link.armed:hover { color: #dc2626; font-weight: 800; text-decoration-color: currentColor; }
   @media (min-width: 640px) {
     .pill { padding: 10px 20px; font-size: 12px; letter-spacing: 0.16em; }
-    .pill-light { padding: 10px 16px; }
-    .short { display: none; } .long { display: inline; }
   }
 
   .board-shell {
@@ -170,10 +173,8 @@
   }
   .category-card h2 {
     margin: 0; color: #fff;
-    font-size: 1.75rem; line-height: 1; text-transform: uppercase; letter-spacing: 0.015em;
+    font-size: clamp(1.75rem, min(3.4vw, 6.5vh), 3.6rem); line-height: 1; text-transform: uppercase; letter-spacing: 0.015em;
   }
-  @media (min-width: 640px) { .category-card h2 { font-size: 2rem; } }
-  @media (min-width: 1024px) { .category-card h2 { font-size: 2.4rem; } }
 
   .clue-card {
     position: relative; overflow: hidden;
@@ -193,11 +194,9 @@
   }
   .clue-card:not(:disabled):hover::after { opacity: 1; }
   .clue-value {
-    color: #fff; font-size: 2.25rem; letter-spacing: 0.015em;
+    color: #fff; font-size: clamp(2.25rem, min(5.6vw, 10vh), 6rem); line-height: 1; letter-spacing: 0.015em;
     text-shadow: 0 3px 0 rgb(0 0 0 / 18%);
   }
-  @media (min-width: 640px) { .clue-value { font-size: 3rem; } }
-  @media (min-width: 1024px) { .clue-value { font-size: 3.75rem; } }
   .clue-card:disabled {
     cursor: default;
     border-color: rgb(255 255 255 / 55%);
@@ -278,9 +277,12 @@
       radial-gradient(circle at 100% 100%, rgb(255 216 77 / 8%), transparent 16rem);
   }
   .modal-inner { position: relative; }
-  .modal-meta { margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .modal-cat { margin: 0; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.24em; color: rgb(255 255 255 / 75%); }
-  .modal-points { margin: 0; font-size: 1.5rem; }
+  .modal-cat {
+    margin: 0 0 20px;
+    font-size: clamp(2.75rem, min(6.5vw, 9vh), 5.5rem); line-height: 1; text-transform: uppercase; letter-spacing: 0.03em;
+    color: #fff; text-shadow: 0 3px 0 rgb(0 0 0 / 18%);
+  }
+  @media (min-width: 640px) { .modal-cat { margin-bottom: 24px; } }
 
   .enlarged {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -292,23 +294,23 @@
     transition: transform 150ms, background-color 150ms;
   }
   .enlarged:hover { transform: scale(1.01); background: rgb(255 255 255 / 15%); }
-  .enlarged .big { font-size: 4.5rem; letter-spacing: 0.03em; line-height: 1; }
-  @media (min-width: 640px) { .enlarged .big { font-size: 8rem; } }
+  .enlarged .big { font-size: clamp(5rem, min(15vw, 26vh), 12rem); letter-spacing: 0.03em; line-height: 1; }
   .enlarged .tap { margin-top: 20px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.22em; color: rgb(255 255 255 / 70%); }
   @media (min-width: 640px) { .enlarged .tap { font-size: 12px; } }
 
   .picker { border-radius: 16px; background: rgb(255 255 255 / 10%); padding: 12px; }
   @media (min-width: 640px) { .picker { padding: 16px; } }
-  .picker-q { margin: 0 0 12px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.18em; }
+  .picker-q { margin: 0 0 12px; font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.18em; }
   .pick-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   @media (min-width: 640px) { .pick-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .pick {
     border-radius: 12px; border: 1px solid rgb(255 255 255 / 20%); background: #fff;
-    padding: 10px 12px; text-align: left; color: #172554;
+    padding: 16px 12px; text-align: center; color: #172554;
     transition: transform 150ms, background-color 150ms;
   }
   .pick:hover { transform: translateY(-2px); background: #f8fafc; }
-  .pick-name { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pick-name { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pick .dot { width: 14px; height: 14px; }
   .dot { width: 10px; height: 10px; border-radius: 999px; flex-shrink: 0; }
   .pick-change { margin-top: 4px; display: block; font-size: 12px; font-weight: 600; color: #64748b; }
   .nobody {
@@ -340,9 +342,7 @@
     </div>
     <div class="actions">
       <button type="button" class="pill pill-dark" id="open-scores">Poengtavle</button>
-      <button type="button" class="pill pill-light" id="reset">
-        <span class="short">Nullstill</span><span class="long">Nullstill brettet</span>
-      </button>
+      <button type="button" class="reset-link" id="reset">Nullstill</button>
     </div>
   </header>
 
@@ -350,10 +350,6 @@
     <div class="quiz-board" id="board"></div>
   </section>
 
-  <footer>
-    <span id="remaining">24 spørsmål igjen</span>
-    <span class="hint">Velg en kategori og poengsum for å begynne</span>
-  </footer>
 </div>
 
 <div class="backdrop backdrop-soft" id="scoreboard" role="dialog" aria-modal="true" aria-labelledby="scoreboard-title" hidden>
@@ -373,10 +369,7 @@
   <article class="clue-modal" id="clue-modal">
     <div class="modal-shine" aria-hidden="true"></div>
     <div class="modal-inner">
-      <div class="modal-meta">
-        <p id="clue-category" class="modal-cat"></p>
-        <p class="display-font modal-points" id="clue-points"></p>
-      </div>
+      <h2 id="clue-category" class="display-font modal-cat"></h2>
       <div id="clue-body"></div>
     </div>
   </article>
@@ -432,6 +425,7 @@
 
   var state = { scores: new Array(TEAMS).fill(0), used: [] };
   var selected = null;
+  var stage = "value";
   var lastFocus = null;
 
   // Restore a game in progress so a page refresh doesn't wipe the scores
@@ -489,7 +483,6 @@
         board.appendChild(btn);
       });
     });
-    $("remaining").textContent = (TOTAL - state.used.length) + " spørsmål igjen";
   }
 
   function renderScoreboard() {
@@ -513,7 +506,6 @@
     var modal = $("clue-modal");
     setColors(modal, c);
     $("clue-category").textContent = categories[c].name;
-    $("clue-points").textContent = selected.value + " poeng";
     showValue();
     $("clue").hidden = false;
     var first = $("clue-body").querySelector("button");
@@ -521,17 +513,19 @@
   }
 
   function showValue() {
+    stage = "value";
     var body = $("clue-body");
     body.innerHTML = "";
     var btn = el("button", "enlarged");
     btn.type = "button";
     btn.appendChild(el("span", "display-font big", String(selected.value)));
-    btn.appendChild(el("span", "tap", "Trykk igjen for å fordele poengene"));
+    btn.setAttribute("aria-label", selected.value + " poeng. Velg lag som svarte riktig");
     btn.addEventListener("click", showPicker);
     body.appendChild(btn);
   }
 
   function showPicker() {
+    stage = "picker";
     var body = $("clue-body");
     body.innerHTML = "";
     var wrap = el("div", "picker");
@@ -547,15 +541,10 @@
       name.appendChild(dot);
       name.appendChild(document.createTextNode("Lag " + (t + 1)));
       b.appendChild(name);
-      b.appendChild(el("span", "pick-change", score + " → " + (score + selected.value)));
       b.addEventListener("click", function () { finishClue(t); });
       grid.appendChild(b);
     });
     wrap.appendChild(grid);
-    var none = el("button", "nobody", "Ingen fikk poeng");
-    none.type = "button";
-    none.addEventListener("click", function () { finishClue(null); });
-    wrap.appendChild(none);
     body.appendChild(wrap);
     grid.querySelector("button").focus();
   }
@@ -574,6 +563,15 @@
     (next || $("open-scores")).focus();
   }
 
+  // Klikk utenfor boksen / Esc: før lagvalg = angre, under lagvalg = ingen fikk poeng
+  function closeClue() {
+    if (!selected) return;
+    if (stage === "picker") { finishClue(null); return; }
+    selected = null;
+    $("clue").hidden = true;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
   function openScores() {
     lastFocus = document.activeElement;
     renderScoreboard();
@@ -585,8 +583,25 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
+  var resetTimer = null;
+  function disarmReset() {
+    clearTimeout(resetTimer);
+    var btn = $("reset");
+    btn.classList.remove("armed");
+    btn.textContent = "Nullstill";
+  }
+
   function resetGame() {
-    if (state.used.length > 0 && !confirm("Vil du nullstille brettet? Alle poeng blir slettet.")) return;
+    var btn = $("reset");
+    // Første klikk ber om bekreftelse i selve knappen, andre klikk nullstiller
+    if (state.used.length > 0 && !btn.classList.contains("armed")) {
+      btn.classList.add("armed");
+      btn.textContent = "Trykk igjen for å nullstille";
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(disarmReset, 3000);
+      return;
+    }
+    disarmReset();
     state = { scores: new Array(TEAMS).fill(0), used: [] };
     selected = null;
     $("clue").hidden = true;
@@ -600,8 +615,12 @@
   $("scoreboard").addEventListener("click", closeScores);
   $("score-panel").addEventListener("click", function (e) { e.stopPropagation(); });
   $("reset").addEventListener("click", resetGame);
+  $("clue").addEventListener("click", closeClue);
+  $("clue-modal").addEventListener("click", function (e) { e.stopPropagation(); });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !$("scoreboard").hidden) closeScores();
+    if (e.key !== "Escape") return;
+    if (!$("clue").hidden) closeClue();
+    else if (!$("scoreboard").hidden) closeScores();
   });
 
   renderBoard();
